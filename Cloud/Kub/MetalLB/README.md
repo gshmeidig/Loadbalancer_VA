@@ -21,19 +21,53 @@ kubectl api-ressources | grep metallb
 
 There are also diffrent Ways to Configura [MetalLB](https://metallb.universe.tf/configuration/), so again verify whats best.
 
-### Conf AdressPool
+### Conf 
 
-YML File:
+Creat AddressPool with YML File:
 ```
 apiVersion: metallb.io/v1beta1
-kind: IPAddress Pool
+kind: IPAddressPool
 metadata:
-        name: first-pool
-        namespace: metallb-system
+    name: first-pool
+    namespace: metallb-system
 spec:
-        addresses:
-                10.1.38.60-10.1.38.70
+    addresses:
+    -10.1.38.60-10.1.38.70
 ```
+
+Apply AddressPool YML File:
+```
+kubectl -n metallb-system apply -f pool-1.yml
+```
+
+Verify deployed Pool:
+```
+kubectl -n metallb-system get IPAddressPool 
+```
+
+Create L2Advertisement:
+```
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+ name: valab-l2
+ namespace: metallb-system
+spec:
+ ipAddressPools:
+ - first-pools
+```
+
+Apply L2Advertisement YML File:
+```
+kubectl -n metallb-system apply -f l2advertisement.yml
+```
+
+Verify deployed L2Advertisement:
+```
+kubectl -n metallb-system get l2advertisement 
+```
+
+
 
 vim Editor:
 there are diffrent Modis:
