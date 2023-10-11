@@ -21,5 +21,24 @@ kubectl api-ressources | grep metallb
 
 There are also diffrent Ways to Configura [MetalLB](https://metallb.universe.tf/configuration/), so again verify whats best.
 
-### AdressPool
+### Conf AdressPool
+
+YML File:
+```
+apiVersion: metallb.io/v1beta1
+kind: IPAddress Pool
+metadata:
+        name: first-pool
+        namespace: metallb-system
+spec:
+        addresses:
+                10.1.38.60-10.1.38.70
+```
+
+vim Editor:
+there are diffrent Modis:
+- Insert :i (exit with ESC)
+
+:set number --> Line number are visible
+:wq --> write out
 
