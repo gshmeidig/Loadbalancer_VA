@@ -16,8 +16,33 @@ frontend webapps *:80
  default_backend webapps
 
 backend webapps
-   server webapp1 webapp1.va.ch
-   server webapp2 webapp2.va.ch
+   server webapp1 webapp1.va.ch:80 check
+   server webapp2 webapp2.va.ch:80 check
+```
+
+Restart HAProxy:
+```
+sudo systemctl restart haproxy
+```
+
+Test if its Started:
+```
+sudo systemctl restart haproxy
+```
+### Test Loadbalancer
+On the Loadbalancer, execute the following command four times. Everytime there should be a message form a diffrent server.
+```
+curl localhost
+```
+
+To do a Live Test with a querry which last 1000 seconds:
+```
+for i in {1..1000};do curl localhost &&sleep 1;done;
+```
+
+Now disable one of the Server:
+```
+sudo systemctl stop httpd
 ```
 
 
