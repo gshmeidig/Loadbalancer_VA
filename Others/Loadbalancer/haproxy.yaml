@@ -1,20 +1,21 @@
-[Main M_KB](/README.md)
-[Others](/Others/README.md)
-# HAProxy
-
-Installation Versione check: [HAProxy Install](https://haproxy.debian.net/)
-
-## Configuriaton
-[YAML-File for HAproxy with config](/Others/Loadbalancer/haproxy.yaml)
-
-Edite haproxy.cfg with [Vim]()
-```
-sudo vim /etc/haproxy/haproxy.cfg
-```
-
-Possible Config:
-```
-global
+#cloud-config
+apt_update: true
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    lock_passwd: false
+    plain_text_passwd: 'password'        
+# login ssh and console with password
+ssh_pwauth: true
+disable_root: false
+packages:
+  - haproxy
+write_files:
+ - content: |
+      global
             maxconn 5000
             log /dev/log    local0
             log /dev/log    local1 notice
@@ -57,72 +58,6 @@ global
       backend webapps
             server webapp1 10.1.38.42:80 check
             server webapp2 10.1.38.43:80 check
-```
-Importen in Config:
-
-      frontend www
-            bind :80
-            default_backend webapps
-
-      backend webapps
-            server webapp1 10.1.38.42:80 check
-            server webapp2 10.1.38.43:80 check
-
-Restart HAProxy:
-```
-sudo systemctl restart haproxy
-```
-
-Test if its Started:
-```
-sudo systemctl status haproxy
-```
-### Test Loadbalancer
-#### Cloud-init for Test
-Webapp Server 1:
-```
-#cloud-config
-packages:
-  - nginx
-write_files:
- - content: |
-    <html>
-     <body>
-      <h1>This is Webapp Server 1</h1>
-     </body>
-    </html>
-   path: /var/www/html/index.html
-   permissions: '0644'
-```
-Webapp Server 2:
-```
-#cloud-config
-packages:
-  - nginx
-write_files:
- - content: |
-    <html>
-     <body>
-      <h1>This is Webapp Server 2</h1>
-     </body>
-    </html>
-   path: /var/www/html/index.html
-   permissions: '0644'
-```
-
-#### Test
-
-On the Loadbalancer, execute the following command four times. Everytime there should be a message form a diffrent server.
-```
-curl localhost
-```
-
-To do a Live Test with a querry which last 1000 seconds:
-```
-for i in {1..1000};do curl localhost &&sleep 1;done;
-```
-
-Now disable one of the Server:
-```
-sudo systemctl stop httpd
-```
+   path: /etc/haproxy/haproxy.cfg
+runcmd: 
+  - sudo systemctl restart haproxy

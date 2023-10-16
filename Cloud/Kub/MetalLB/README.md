@@ -45,7 +45,7 @@ Verify deployed Pool:
 kubectl -n metallb-system get IPAddressPool 
 ```
 
-Create L2Advertisement:
+Create L2Advertisement with [Vim](/Others/Editors/README.md):
 ```
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
@@ -67,12 +67,4 @@ Verify deployed L2Advertisement:
 kubectl -n metallb-system get l2advertisement 
 ```
 
-
-
-vim Editor:
-there are diffrent Modis:
-- Insert :i (exit with ESC)
-
-:set number --> Line number are visible
-:wq --> write out
 
