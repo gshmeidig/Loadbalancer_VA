@@ -1,3 +1,5 @@
+[Main M_KB](/README.md)
+[Cisco](/Cisco/README.md)
 # Cisco Labs
 
 ## Briefly summarized
@@ -16,11 +18,15 @@ Types of IPv6 Unicast Addresses:
     ![IPv6 Struccture](/Cisco/Labs/Bilder/IPv6_structure.png)
         - Global Routing Prefix assigned by ISP
         - Subnet ID used to identify subnets within sites
-        - INterface ID equivalent to host portion (recommended /64 subnets)
+        - Interface ID equivalent to host portion (recommended /64 subnets)
+    - obtained dynamically through Internet Control Message Protocol version 6 (ICMPv6)
+    - 
 
 - Link-local Address (LLA)
     - Required for every IPv6-enabled Device
     - not routable and only Single Link
+    - Every IPv6-enabled network interface must have LLA
+    - if not manually configured, device automatically create one.
 
 IPv6 Unique Local Address(ULA) used for:
 - range fc00::/7 to fdff::/7
