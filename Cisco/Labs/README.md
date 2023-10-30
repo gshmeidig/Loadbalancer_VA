@@ -12,8 +12,11 @@ Types of IPv6 Unicast Addresses:
     - Similar to Public IPv4
     - Global Unique
     - internet-routable addresses
-    - Global Routing Prefix (GRP): assigned by ISP
-    - [IPv6 Struccture](/Cisco/Labs/Bilder/IPv6_structure.png)
+    - IPv6 Structure and available Range form ISP (only 1/8 of available address space)
+    ![IPv6 Struccture](/Cisco/Labs/Bilder/IPv6_structure.png)
+        - Global Routing Prefix assigned by ISP
+        - Subnet ID used to identify subnets within sites
+        - INterface ID equivalent to host portion (recommended /64 subnets)
 
 - Link-local Address (LLA)
     - Required for every IPv6-enabled Device
