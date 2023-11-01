@@ -34,7 +34,22 @@ IPv6 Unique Local Address(ULA) used for:
 - not gloablly-routed or translated to global IPv6
 - is used for secure or hide network
 
+### STP
+Switch (ports)
+Roles:
+- Root Port; The best port to reach the Root Bridge
+- Designated Port; Port with the best route to the Root Bridge on a link
+- Non.Designated Port; All other ports that are on a blocking state
 
+States:
+- Disabled; A port that is shutdown
+- Blocking; A port that is blocking traffic
+- Listening; Not forwarding traffic and not learning MAC addresses
+- Learning; Not forwarding traggic but leraning MAC addresses
+- Forwarding; Sending and receiving traffic like normal
+
+Bsp.:
+![STP](/Cisco/Labs/Bilder/STP.png)
 
 ## Labs
 -  [Implement a Subnetted IPv6 Addressing](#implement-a-subnetted-ipv6-addressing)
